@@ -19,12 +19,12 @@ from deepgram import (
 
 load_dotenv()
 
-# genai.configure(google_api_key=st.secrets['API_KEY'])
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
+# genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 genai.GenerationConfig(temperature=0.4)
 model = genai.GenerativeModel("gemini-pro")
-# deepgram = DeepgramClient(api_key=st.secrets["DG_API_KEY"])
-deepgram = DeepgramClient(api_key=os.getenv("DG_API_KEY"))
+deepgram = DeepgramClient(api_key=st.secrets["DG_API_KEY"])
+# deepgram = DeepgramClient(api_key=os.getenv("DG_API_KEY"))
 def tts(text):
     try:
         filename = "output.wav"
