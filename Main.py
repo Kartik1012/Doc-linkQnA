@@ -1,4 +1,5 @@
 import streamlit as st
+import PyPDF2
 from PyPDF2 import PdfReader
 import os
 from langchain.text_splitter import RecursiveCharacterTextSplitter
