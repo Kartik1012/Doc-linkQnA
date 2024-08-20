@@ -1,5 +1,5 @@
 import streamlit as st
-import PyPDF2
+import pypdf
 from PyPDF2 import PdfReader
 import os
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -9,7 +9,7 @@ from langchain_community.vectorstores import FAISS
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
-from langchain_community.document_loaders import UnstructuredURLLoader
+from langchain_community.document_loaders import UnstructuredURLLoader,TextLoader
 from dotenv import load_dotenv
 # import darkmode
 import base64
@@ -43,13 +43,25 @@ def tts(text):
         print(f"Exception: {e}")
 
 
+# def get_response_doc(doc):
+#     text = ""
+#     for pdf in doc:
+#         # pdf_reader = PdfReader(pdf)
+#         pdf_reader=TextLoader(pdf)
+#         for page in pdf_reader.pages:
+#             text += page.extract_text()
+#     return text
+    
 def get_response_doc(doc):
-    text = ""
-    for pdf in doc:
-        pdf_reader = PdfReader(pdf)
-        for page in pdf_reader.pages:
-            text += page.extract_text()
-    return text
+    loader = PyPDFLoader(pdf_path)  # Initialize the loader with the PDF path
+    documents = loader.load()  # Load the content
+    
+    # Concatenate the text from the document
+    extracted_text = ""
+    for document in documents:
+        extracted_text += document.page_content + "\n"
+    
+    return extracted_text
 
 
 def get_response_url(urls):
