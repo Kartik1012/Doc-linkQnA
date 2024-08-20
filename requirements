@@ -8,4 +8,4 @@ langchain_community
 unstructured
 deepgram-sdk
 PyPDF2
-PyPDF4
+pypdf
